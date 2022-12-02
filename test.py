@@ -10,7 +10,7 @@ import os
 import time 
 
 
-proxy = "socks4://77.122.57.126:1080"
+#proxy = "socks4://77.122.57.126:1080"
 
 #prox = Proxy()
 #prox.proxy_type = ProxyType.MANUAL
@@ -20,13 +20,13 @@ proxy = "socks4://77.122.57.126:1080"
 #prox.set_preference('network.proxy.socks_version', 4)
 #prox.ssl_proxy = "ip_addr:port"
 
-def install_firefox_proxy(PROXY_HOST,PROXY_PORT):
-    fp = webdriver.FirefoxProfile()
-    fp.set_preference("network.proxy.type", 1)
-    fp.set_preference("network.proxy.socks", PROXY_HOST)
-    fp.set_preference("network.proxy.socks_port", int(PROXY_PORT))
-    fp.update_preferences()
-    return webdriver.Firefox(firefox_profile=fp, executable_path="F:\\Documents\\Projects\\chatVtroemRevived\\geckodriver.exe")
+# def install_firefox_proxy(PROXY_HOST,PROXY_PORT):
+#     fp = webdriver.FirefoxProfile()
+#     fp.set_preference("network.proxy.type", 1)
+#     fp.set_preference("network.proxy.socks", PROXY_HOST)
+#     fp.set_preference("network.proxy.socks_port", int(PROXY_PORT))
+#     fp.update_preferences()
+#     return webdriver.Firefox(firefox_profile=fp, executable_path="F:\\Documents\\Projects\\chatVtroemRevived\\geckodriver.exe")
 
 #capabilities = webdriver.DesiredCapabilities.FIREFOX
 #prox.add_to_capabilities(capabilities)
@@ -49,17 +49,8 @@ def tryToWrite(ip_port):
         topic = driver.find_element_by_id("topic")
         topic.send_keys("лол")
         button = driver.find_element_by_id("chat_start")
-        button.click()
-        #WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, 'status-chat-started')))
-        #topic = driver.find_element_by_id("status-chat-started")
-        # WebDriverWait(driver).until(EC.presence_of_element_located((By.ID, "log"))) #status-chat-started Чат начат, text, but-send, @ended-message
-        #WebDriverWait(driver).until(EC.visibility_of((By.ID, "status-chat-started")))    
-        # topics-loading-spinner    
+        button.click()      
         WebDriverWait(driver,600).until(EC.invisibility_of_element_located((By.ID, "status-chat-started")))
-        #WebDriverWait(driver).until(EC.visibility_of((By.ID, "status-chat-started")))
-        #driver.implicitly_wait(10)
-        # nickname    
-        #WebDriverWait(driver,600).until(EC.visibility_of_element_located((By.ID, "captcha")))
         try:
             WebDriverWait(driver,15).until(EC.visibility_of_element_located((By.ID, "topic-current-chat")))
         except:
@@ -69,7 +60,6 @@ def tryToWrite(ip_port):
         button = driver.find_element_by_id("but-send")
         button.click()
         WebDriverWait(driver,60).until(EC.invisibility_of_element_located((By.Class, "ended-message")))
-        #WebDriverWait(driver, 1000).until(EC.text_to_be_present_in_element_value((By.ID, 'topic'), "\"Аноним\""))
         return "Win"
 
 proxylist = [
